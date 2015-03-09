@@ -15,7 +15,7 @@
 	<description>Spring公共配置 </description>
 
 	<!-- 定义扫描根路径，不使用默认的扫描方式 -->
-	<context:component-scan base-package="cn.hnist.teach.service.impl"
+	<context:component-scan base-package="cn.hnist.teach.service"
 		use-default-filters="false">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Service" />
@@ -76,7 +76,7 @@
 	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/mysql" />
+		<property name="url" value="jdbc:mysql://localhost:3306/teach" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 		<property name="initialSize" value="5" />

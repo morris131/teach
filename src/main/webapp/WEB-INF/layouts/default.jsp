@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <!-- Title and other stuffs -->
-<title>Bootstrap响应式后台管理系统模版Mac - 代码家园-www.daimajiayuan.com</title>
+<title> <sitemesh:write property='title' /></title>
 <meta name="keywords"
 	content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文,后台管理系统模版,后台模版下载,后台管理系统,后台管理模版" />
 <meta name="description"
@@ -48,7 +48,7 @@
   <![endif]-->
 
 
-<sitemesh:head />
+ <sitemesh:write property='head' />
 </head>
 
 <body>
@@ -67,19 +67,23 @@
 			<ul id="nav">
 				<!-- Main menu with font awesome icon -->
 				<li><a href="index.html" class="open"><i class="icon-home"></i>
-						首页</a> <!-- Sub menu markup 
-            <ul>
-              <li><a href="#">Submenu #1</a></li>
-              <li><a href="#">Submenu #2</a></li>
-              <li><a href="#">Submenu #3</a></li>
-            </ul>--></li>
+						首页</a>
+				</li>
 				<li class="has_sub"><a href="#"><i class="icon-list-alt"></i>
-						插件页面 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+						课程简介管理 <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
 					<ul>
-						<li><a href="widgets1.html">插件页面 #1</a></li>
-						<li><a href="widgets2.html">插件页面 #2</a></li>
-						<li><a href="widgets3.html">插件页面 #3</a></li>
+						<li><a href="${ctx }/admin/addCourseIntro">添加信息</a></li>
+						<li><a href="${ctx }/admin/findCourseIntros">查询所有</a></li>
 					</ul></li>
+				<li class="has_sub"><a href="#"><i class="icon-list-alt"></i>
+						师资介绍管理 <span class="pull-right"><i
+							class="icon-chevron-right"></i></span></a>
+					<ul>
+						<li><a href="${ctx }/admin/addCourseIntro">添加信息</a></li>
+						<li><a href="${ctx }/admin/findCourseIntros">查询所有</a></li>
+						<li><a href="${ctx }/admin/findTeacherIntroTypes">管理分类</a></li>
+					</ul>
+				</li>
 				<li class="has_sub"><a href="#"><i class="icon-file-alt"></i>
 						页面模块1 <span class="pull-right"><i
 							class="icon-chevron-right"></i></span></a>
@@ -135,7 +139,7 @@
 			</div>
 			<!-- Page heading ends -->
 
-			<sitemesh:body />
+			<sitemesh:write property='body' />
 		</div>
 
 		<!-- Mainbar ends -->

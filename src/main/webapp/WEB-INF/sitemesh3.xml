@@ -4,6 +4,7 @@
 <mine-type>text/html</mine-type>
 
 <mapping path="/static/*" exclue="true"></mapping>	
+<mapping path="/admin/login" exclue="true"></mapping>	
 
 <mapping path="/admin/*" decorator="/WEB-INF/layouts/default.jsp"></mapping>
 

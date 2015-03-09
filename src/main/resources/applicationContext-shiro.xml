@@ -12,24 +12,26 @@
 	</bean>
 
 	<!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
-	<bean id="shiroDbRealm" class="cn.hnist.teach.service.account.MyRealm">
+	<bean id="shiroDbRealm" class="cn.hnist.teach.service.account.ShiroRealm">
 	</bean>
 	
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/login" />
-		<property name="successUrl" value="/" />
+		<property name="loginUrl" value="/admin/login" />
+		<property name="successUrl" value="/admin/index" />
+ 		<property name="unauthorizedUrl" value="/admin/login" />
 		<property name="filterChainDefinitions">
 			<value>
-				/login = authc
-				/logout = logout
+				/admin/login = anon
+				/admin/logout = anon
 				/static/** = anon
 				/favicon.ico = anon
 				/api/** = anon
 				/register/** = anon
-				/admin/** = roles[admin]
-				/** = user
+				/admin/** = user
+				/admin/system/** = user,roles[admin]
+				/** = anon
 			</value>
 		</property>
 	</bean>
