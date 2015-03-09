@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+
+<mine-type>text/html</mine-type>
+
+<mapping path="/static/*" exclue="true"></mapping>	
+
+<mapping path="/admin/*" decorator="/WEB-INF/layouts/default.jsp"></mapping>
+
+	
+
+	
+	
+	
+</sitemesh>
