@@ -3,7 +3,7 @@
  */
 package cn.hnist.teach.service.inter;
 
-import java.io.Serializable;
+import cn.hnist.teach.entity.CourseIntro;
 
 /** 
  *	项 目 名:	teach
@@ -12,7 +12,7 @@ import java.io.Serializable;
  *	作    者:	Morris
  *	创建时间:	2015年3月8日 上午10:12:49
  */
-public interface ICourseIntroService<T,ID extends Serializable> extends IBaseService<T, ID>{
+public interface ICourseIntroService extends IBaseService<CourseIntro, Integer>{
 
 }
 

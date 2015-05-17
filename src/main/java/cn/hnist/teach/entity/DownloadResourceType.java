@@ -1,81 +1,70 @@
 package cn.hnist.teach.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.io.Serializable;
 
-/**
- * DownloadResourceType entity. @author MyEclipse Persistence Tools
- */
+import javax.persistence.*;
+
+import java.util.List;
+
 @Entity
-@Table(name = "download_resource_type", catalog = "teach")
-public class DownloadResourceType implements java.io.Serializable {
-
-	// Fields
-
-	/**
-	 * 
-	 */
+@Table(name="download_resource_type")
+@NamedQuery(name="DownloadResourceType.findAll", query="SELECT d FROM DownloadResourceType d")
+public class DownloadResourceType implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Integer downTypeId;
-	private String downTypeName;
-	private Set<DownloadResource> downloadResources = new HashSet<DownloadResource>(
-			0);
 
-	// Constructors
+	@Id
+	@GeneratedValue
+	private Short id;
 
-	/** default constructor */
+	private String name;
+
+	//bi-directional many-to-one association to DownloadResource
+	@OneToMany(mappedBy="downloadResourceType",cascade=CascadeType.REMOVE)
+	private List<DownloadResource> downloadResources;
+
 	public DownloadResourceType() {
 	}
 
-	/** minimal constructor */
-	public DownloadResourceType(String downTypeName) {
-		this.downTypeName = downTypeName;
+	public Short getId() {
+		return this.id;
 	}
 
-	/** full constructor */
-	public DownloadResourceType(String downTypeName,
-			Set<DownloadResource> downloadResources) {
-		this.downTypeName = downTypeName;
-		this.downloadResources = downloadResources;
+	public void setId(Short id) {
+		this.id = id;
 	}
 
-	// Property accessors
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "down_type_id", unique = true, nullable = false)
-	public Integer getDownTypeId() {
-		return this.downTypeId;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setDownTypeId(Integer downTypeId) {
-		this.downTypeId = downTypeId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@Column(name = "down_type_name", nullable = false, length = 50)
-	public String getDownTypeName() {
-		return this.downTypeName;
-	}
-
-	public void setDownTypeName(String downTypeName) {
-		this.downTypeName = downTypeName;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "downloadResourceType")
-	public Set<DownloadResource> getDownloadResources() {
+	public List<DownloadResource> getDownloadResources() {
 		return this.downloadResources;
 	}
 
-	public void setDownloadResources(Set<DownloadResource> downloadResources) {
+	public void setDownloadResources(List<DownloadResource> downloadResources) {
 		this.downloadResources = downloadResources;
 	}
 
+	public DownloadResource addDownloadResource(DownloadResource downloadResource) {
+		getDownloadResources().add(downloadResource);
+		downloadResource.setDownloadResourceType(this);
+
+		return downloadResource;
+	}
+
+	public DownloadResource removeDownloadResource(DownloadResource downloadResource) {
+		getDownloadResources().remove(downloadResource);
+		downloadResource.setDownloadResourceType(null);
+
+		return downloadResource;
+	}
+
+	@Override
+	public String toString() {
+		return "DownloadResourceType [id=" + id + ", name=" + name + "]";
+	}
 }

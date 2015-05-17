@@ -1,84 +1,86 @@
 package cn.hnist.teach.entity;
 
+import java.io.Serializable;
+import java.util.Date;
 
-import java.sql.Timestamp;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-/**
- * 师资介绍实体类
- */
 @Entity
-@Table(name = "teacher_intro", catalog = "teach")
-public class TeacherIntro implements java.io.Serializable {
-
-	@Override
-	public String toString() {
-		return "TeacherIntro [teacherId=" + teacherId + ", teacherIntroType="
-				+ teacherIntroType + ", teacherTitle=" + teacherTitle
-				+ ", teacherContent=" + teacherContent + ", teacherDate="
-				+ teacherDate + ", teacherCount=" + teacherCount + "]";
-	}
-
-	/**
-	 * 
-	 */
+@Table(name="teacher_intro")
+public class TeacherIntro implements Serializable {
 	private static final long serialVersionUID = 1L;
-	// Fields
 
-	private Integer teacherId;//id
-	private TeacherIntroType teacherIntroType;//对应内容实体类
-	private String teacherTitle;//标题
-	private String teacherContent;//内容
-	private Timestamp teacherDate;//发布时间
-	private Integer teacherCount;//点击次数
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
 
-	// Constructors
+	@Lob
+	private String content;
 
-	/** default constructor */
+	private Long count;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date datetime;
+
+	private String title;
+
+	//bi-directional many-to-one association to TeacherIntroType
+	@ManyToOne
+	@JoinColumn(name="type")
+	private TeacherIntroType teacherIntroType;
+
 	public TeacherIntro() {
 	}
 
-	/** minimal constructor */
-	public TeacherIntro(String teacherTitle, String teacherContent,
-			Timestamp teacherDate, Integer teacherCount) {
-		this.teacherTitle = teacherTitle;
-		this.teacherContent = teacherContent;
-		this.teacherDate = teacherDate;
-		this.teacherCount = teacherCount;
+	public int getId() {
+		return this.id;
 	}
 
-	/** full constructor */
-	public TeacherIntro(TeacherIntroType teacherIntroType, String teacherTitle,
-			String teacherContent, Timestamp teacherDate, Integer teacherCount) {
-		this.teacherIntroType = teacherIntroType;
-		this.teacherTitle = teacherTitle;
-		this.teacherContent = teacherContent;
-		this.teacherDate = teacherDate;
-		this.teacherCount = teacherCount;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	// Property accessors
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "teacher_id", unique = true, nullable = false)
-	public Integer getTeacherId() {
-		return this.teacherId;
+	public String getContent() {
+		return this.content;
 	}
 
-	public void setTeacherId(Integer teacherId) {
-		this.teacherId = teacherId;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "teacher_type")
+	public Long getCount() {
+		return this.count;
+	}
+
+	public void setCount(Long count) {
+		this.count = count;
+	}
+
+	public Date getDatetime() {
+		return this.datetime;
+	}
+
+	public void setDatetime(Date datetime) {
+		this.datetime = datetime;
+	}
+
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public TeacherIntroType getTeacherIntroType() {
 		return this.teacherIntroType;
 	}
@@ -87,40 +89,9 @@ public class TeacherIntro implements java.io.Serializable {
 		this.teacherIntroType = teacherIntroType;
 	}
 
-	@Column(name = "teacher_title", nullable = false, length = 50)
-	public String getTeacherTitle() {
-		return this.teacherTitle;
+	@Override
+	public String toString() {
+		return "TeacherIntro [id=" + id + ", content=" + content + ", count="
+				+ count + ", datetime=" + datetime + ", title=" + title + "]";
 	}
-
-	public void setTeacherTitle(String teacherTitle) {
-		this.teacherTitle = teacherTitle;
-	}
-
-	@Column(name = "teacher_content", nullable = false, length = 65535)
-	public String getTeacherContent() {
-		return this.teacherContent;
-	}
-
-	public void setTeacherContent(String teacherContent) {
-		this.teacherContent = teacherContent;
-	}
-
-	@Column(name = "teacher_date", nullable = false, length = 19)
-	public Timestamp getTeacherDate() {
-		return this.teacherDate;
-	}
-
-	public void setTeacherDate(Timestamp teacherDate) {
-		this.teacherDate = teacherDate;
-	}
-
-	@Column(name = "teacher_count", nullable = false)
-	public Integer getTeacherCount() {
-		return this.teacherCount;
-	}
-
-	public void setTeacherCount(Integer teacherCount) {
-		this.teacherCount = teacherCount;
-	}
-
 }

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>添加课程简介</title>
 <script type="text/javascript" charset="utf-8"
 	src="${ctx}/static/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8"
@@ -13,6 +13,14 @@
 </script>
 <script type="text/javascript" charset="utf-8"
 	src="${ctx}/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+	
+	<script type="text/javascript">
+	
+	$(function(){
+		var ue = UE.getEditor('editor');
+		$("#editor").show();
+	});
+</script>
 
 </head>
 <body>
@@ -25,7 +33,7 @@
 				<div class="widget">
 					<!-- Widget head -->
 					<div class="widget-head">
-						<div class="pull-left">添加课程信息</div>
+						<div class="pull-left">添加课程简介</div>
 						<div class="clearfix"></div>
 					</div>
 
@@ -38,14 +46,14 @@
 								<div class="form-group">
 									<label class="col-lg-4 control-label">标题</label>
 									<div class="col-lg-8">
-										<input type="text" name="courseTitle" class="form-control" placeholder="请输入标题">
+										<input type="text" name="title" class="form-control" placeholder="请输入标题">
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label class="col-lg-4 control-label">内容</label>
 									<div class="col-lg-8">
-										<textarea id="editor" style="height: 350px;" name="courseContent"></textarea>
+										<textarea id="editor" style="height: 350px;display: none;" name="content"></textarea>
 									</div>
 								</div>
 								
@@ -68,9 +76,5 @@
 		</div>
 	</div>
 	
-<script type="text/javascript">
-	var ue = UE.getEditor('editor').setHeight(600);
-</script>
-
 </body>
 </html>

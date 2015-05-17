@@ -1,70 +1,95 @@
 package cn.hnist.teach.entity;
 
+import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-/**
- * ExperimentArrange entity. @author MyEclipse Persistence Tools
- */
 @Entity
-@Table(name = "experiment_arrange", catalog = "teach")
-public class ExperimentArrange implements java.io.Serializable {
-
-	// Fields
-
-	/**
-	 * 
-	 */
+@Table(name="experiment_arrange")
+@NamedQuery(name="ExperimentArrange.findAll", query="SELECT e FROM ExperimentArrange e")
+public class ExperimentArrange implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Integer expId;
-	private String expTitle;
-	private String expContent;
 
-	// Constructors
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
 
-	/** default constructor */
+	@Lob
+	private String content;
+
+	private String title;
+
 	public ExperimentArrange() {
 	}
 
-	/** full constructor */
-	public ExperimentArrange(String expTitle, String expContent) {
-		this.expTitle = expTitle;
-		this.expContent = expContent;
+	public int getId() {
+		return this.id;
 	}
 
-	// Property accessors
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "exp_id", unique = true, nullable = false)
-	public Integer getExpId() {
-		return this.expId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public void setExpId(Integer expId) {
-		this.expId = expId;
+	public String getContent() {
+		return this.content;
 	}
 
-	@Column(name = "exp_title", nullable = false, length = 50)
-	public String getExpTitle() {
-		return this.expTitle;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public void setExpTitle(String expTitle) {
-		this.expTitle = expTitle;
+	public String getTitle() {
+		return this.title;
 	}
 
-	@Column(name = "exp_content", nullable = false, length = 65535)
-	public String getExpContent() {
-		return this.expContent;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public void setExpContent(String expContent) {
-		this.expContent = expContent;
+	@Override
+	public String toString() {
+		return "ExperimentArrange [id=" + id + ", content=" + content
+				+ ", title=" + title + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ExperimentArrange other = (ExperimentArrange) obj;
+		if (content == null) {
+			if (other.content != null)
+				return false;
+		} else if (!content.equals(other.content))
+			return false;
+		if (id != other.id)
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		return true;
+	}
+
+	public ExperimentArrange(int id, String content, String title) {
+		super();
+		this.id = id;
+		this.content = content;
+		this.title = title;
+	}
 }

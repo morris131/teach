@@ -1,120 +1,122 @@
 package cn.hnist.teach.entity;
 
+import java.io.Serializable;
 
-import java.sql.Timestamp;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-/**
- * DownloadResource entity. @author MyEclipse Persistence Tools
- */
+import java.util.Date;
+
 @Entity
-@Table(name = "download_resource", catalog = "teach")
-public class DownloadResource implements java.io.Serializable {
-
-	// Fields
-
-	/**
-	 * 
-	 */
+@Table(name="download_resource")
+@NamedQuery(name="DownloadResource.findAll", query="SELECT d FROM DownloadResource d")
+public class DownloadResource implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Integer downId;
-	private DownloadResourceType downloadResourceType;
-	private String downTitle;
-	private String downContent;
-	private Timestamp downDate;
-	private Integer downCount;
 
-	// Constructors
-
-	/** default constructor */
-	public DownloadResource() {
-	}
-
-	/** minimal constructor */
-	public DownloadResource(String downTitle, String downContent,
-			Timestamp downDate, Integer downCount) {
-		this.downTitle = downTitle;
-		this.downContent = downContent;
-		this.downDate = downDate;
-		this.downCount = downCount;
-	}
-
-	/** full constructor */
-	public DownloadResource(DownloadResourceType downloadResourceType,
-			String downTitle, String downContent, Timestamp downDate,
-			Integer downCount) {
-		this.downloadResourceType = downloadResourceType;
-		this.downTitle = downTitle;
-		this.downContent = downContent;
-		this.downDate = downDate;
-		this.downCount = downCount;
-	}
-
-	// Property accessors
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "down_id", unique = true, nullable = false)
-	public Integer getDownId() {
-		return this.downId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+
+	@Lob
+	private String content;
+
+	private Long count;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date datetime;
+
+	private String title;
+
+	private String name;
+	
+	private String realName;
+	
+	@ManyToOne
+	@JoinColumn(name="src")
+	private ResourceSrc resourceSrc;
+
+	public ResourceSrc getResourceSrc() {
+		return resourceSrc;
 	}
 
-	public void setDownId(Integer downId) {
-		this.downId = downId;
+	public void setResourceSrc(ResourceSrc resourceSrc) {
+		this.resourceSrc = resourceSrc;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "down_type")
+	//bi-directional many-to-one association to DownloadResourceType
+	@ManyToOne
+	@JoinColumn(name="type")
+	private DownloadResourceType downloadResourceType;
+
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getContent() {
+		return this.content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Long getCount() {
+		return this.count;
+	}
+
+	public void setCount(Long count) {
+		this.count = count;
+	}
+
+	public Date getDatetime() {
+		return this.datetime;
+	}
+
+	public void setDatetime(Date datetime) {
+		this.datetime = datetime;
+	}
+
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public DownloadResourceType getDownloadResourceType() {
 		return this.downloadResourceType;
 	}
 
-	public void setDownloadResourceType(
-			DownloadResourceType downloadResourceType) {
+	public void setDownloadResourceType(DownloadResourceType downloadResourceType) {
 		this.downloadResourceType = downloadResourceType;
 	}
 
-	@Column(name = "down_title", nullable = false, length = 50)
-	public String getDownTitle() {
-		return this.downTitle;
+	public String getName() {
+		return name;
 	}
 
-	public void setDownTitle(String downTitle) {
-		this.downTitle = downTitle;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@Column(name = "down_content", nullable = false, length = 65535)
-	public String getDownContent() {
-		return this.downContent;
+	public String getRealName() {
+		return realName;
 	}
 
-	public void setDownContent(String downContent) {
-		this.downContent = downContent;
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 
-	@Column(name = "down_date", nullable = false, length = 19)
-	public Timestamp getDownDate() {
-		return this.downDate;
+	@Override
+	public String toString() {
+		return "DownloadResource [id=" + id + ", content=" + content
+				+ ", count=" + count + ", datetime=" + datetime + ", title="
+				+ title + ", name=" + name + ", realName=" + realName + "]";
 	}
-
-	public void setDownDate(Timestamp downDate) {
-		this.downDate = downDate;
-	}
-
-	@Column(name = "down_count", nullable = false)
-	public Integer getDownCount() {
-		return this.downCount;
-	}
-
-	public void setDownCount(Integer downCount) {
-		this.downCount = downCount;
-	}
-
+	
+	
 }

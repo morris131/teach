@@ -1,0 +1,269 @@
+/* 为了让ie浏览器居中显示内容 */
+body {
+	text-align: center;
+	/*background: url(../images/header_bg.jpg) repeat-x 0 0;*/
+	/*background: url("../images/bj.jpg") repeat-x scroll 0 0 rgba(0, 0, 0, 0);*/
+    margin: 0;
+}
+.main {
+	text-align: left;
+	width: 958px;
+	margin: 0 auto;
+}
+/* 头部样式 */
+.header {
+	height: 250px;
+	/*background: url(../images/header.jpg) no-repeat;*/
+	position: relative;
+}
+/* 导航条样式 */
+.topbar {
+	height: 42px;
+	line-height: 42px;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
+	background-color:#073990;
+	/*background: url(../images/bj.jpg);*/
+}
+.topbar ul li {
+	display: inline;
+	color: white;
+	padding: 12px 20px;
+}
+
+.topbar ul li a {
+	color: white;
+}
+
+.topbarClick{
+	color: gray;
+}
+
+.topbar ul li a:hover {
+	color: gray;
+	text-decoration: none;
+}	
+/* 通知信息样式 */
+.notice {
+	height: 23px;
+	line-height: 23px;
+	background: url(../images/notice.jpg) repeat-x;
+}
+.notice p {
+	background: url(../images/left_logo.jpg) 0px 8px no-repeat;
+	padding-left: 10px;
+	margin-left: 10px;
+}
+.notice a:hover {
+	text-decoration: none;
+}
+.more {
+	color: #0253a5;
+}
+.main_visual {
+	margin-top: 10px;
+}
+/* 下面信息框 */
+.message {
+	margin-top: 20px;
+}
+.left {
+	float: left;
+	width: 465px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	_margin-bottom: 0px;
+}
+.left_m {
+	width: 465px;
+	border: 1px solid #aaa;
+	height: 215px;
+}
+.right {
+	float: right;
+	width: 465px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	_margin-bottom: 0px;
+}
+.right_m {
+	width: 465px;
+	border: 1px solid #aaa;
+	height: 215px;
+}
+.shadow {
+	text-align: center;
+}
+.clear {
+	clear: both;
+}
+
+.footer {
+	height: 70px;
+	line-height: 70px;
+	/*background: url(../images/footer.jpg) repeat-x;
+	color: #fff;*/
+}
+.footer p {
+	text-align: center;
+	line-height: 20px;
+}
+.address {
+	padding-top: 15px;
+}
+
+.one_left {
+	margin: 5px;
+}
+.float_right {
+	float: right;
+	margin-top: 15px;
+	margin-right: 10px;
+}
+.left_ul {
+	margin: 10px;
+	margin-top: 0px;
+}
+.left_ul li {
+	padding-left: 10px;
+	margin-left: 10px;
+	background: url(../images/left_logo.jpg) no-repeat 0px 10px;
+	border-bottom: 1px dotted #aaa;
+	height: 30px;
+	line-height: 30px;
+}
+.left_ul li a {
+	*float: left;
+}
+.left_ul .li_click_y {
+	background: url(../images/left_logo_click.jpg) no-repeat 0px 10px;
+}
+.left_ul .li_click_b {
+	background: url(../images/left_logo_b.jpg) no-repeat 0px 10px;
+}
+.left_ul .li_click_y a {
+	color: #f18612;
+}
+.left_ul .li_click_b a {
+	color: #0153a5;
+}	
+.right_time {
+	float: right;
+	margin-right: 10px;
+}
+
+.sub, 
+.res {
+	width: 50px;
+	height: 20px;
+	line-height: 20px;
+	border: 1px solid #aaa;
+	_border: none;
+	background: url(../images/button_bg.jpg) repeat-x;
+}
+.forget {
+	margin-left: 10px;
+	color: #0153a5;
+}
+.clicked {
+	color: #0153a5;
+}	
+
+/* 精品页面css */
+.bar {
+	margin: 10px 0px;
+	border: 1px solid #aaa;
+	height: 113px;
+	overflow: hidden;
+}
+.details {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.d_left {
+	float: left;
+	width: 203px;	
+	border: 1px solid #aaa;
+}
+.d_left_top {
+	width: 203px;
+	border: 1px solid #ff0000;
+}
+.d_right {
+	float: right; 
+	width: 723px;
+}
+.d_right_top {
+	width: 723px;
+}
+
+/* 左侧栏目导航样式 */
+.title {
+	text-align: left;
+	background-color: #073990;
+	padding: 0px 25px;
+	height: 33px;
+	line-height: 33px;
+	border-bottom: 1px solid #cecece;
+	font-size: 14px;
+	color: #fff;
+}
+
+.title a{
+	color: white;
+}
+
+/* 关于我们页面样式 */
+.int {
+	border: 1px solid #aaa;
+	margin-bottom: 20px;
+}
+.int_title {
+	height: 30px;
+	line-height: 30px;
+	background: #0550a3;
+}
+.int_con p {
+	text-indent: 2em;
+	line-height: 30px;
+	font-size: 14px;
+	margin: 10px 20px;
+}
+.t_c {
+	text-align: center;
+	margin: 10px;
+}
+
+.res-title {
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 10px;  
+	padding-bottom: 10px;
+	font-size: 16px;
+	font-weight: bold;
+	border-bottom: 1px dashed #ccc;
+	
+}
+
+.res-info {
+	text-align: center;
+	border-bottom: 1px dashed #ccc;
+	margin-top: 10px;
+	margin-bottom: 10px;  
+	padding-bottom: 10px;
+}
+
+.res-content {
+	border-bottom: 1px dashed #ccc;
+	margin-top: 10px;
+	margin-bottom: 20px; 
+	padding-bottom: 10px;
+}
+
+.res-footer{
+	border-bottom: 1px dashed #ccc;
+	margin-top: 10px;
+	margin-bottom: 20px; 
+	padding-bottom: 10px;
+}

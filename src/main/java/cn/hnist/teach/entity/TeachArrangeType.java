@@ -1,81 +1,105 @@
 package cn.hnist.teach.entity;
 
+import java.io.Serializable;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-/**
- * TeachArrangeType entity. @author MyEclipse Persistence Tools
- */
+import java.util.List;
+
 @Entity
-@Table(name = "teach_arrange_type", catalog = "teach")
-public class TeachArrangeType implements java.io.Serializable {
-
-	/**
-	 * 
-	 */
+@Table(name="teach_arrange_type")
+@NamedQuery(name="TeachArrangeType.findAll", query="SELECT t FROM TeachArrangeType t")
+public class TeachArrangeType implements Serializable {
 	private static final long serialVersionUID = 1L;
-	// Fields
 
-	private Integer teachTypeId;
-	private String teachTypeName;
-	private Set<TeachArrange> teachArranges = new HashSet<TeachArrange>(0);
+	@Id
+	@GeneratedValue
+	private int id;
 
-	// Constructors
+	private String name;
 
-	/** default constructor */
+	//bi-directional many-to-one association to TeachArrange
+	@OneToMany(mappedBy="teachArrangeType",cascade={CascadeType.REMOVE,CascadeType.REFRESH})
+	private List<TeachArrange> teachArranges;
+
 	public TeachArrangeType() {
 	}
 
-	/** minimal constructor */
-	public TeachArrangeType(String teachTypeName) {
-		this.teachTypeName = teachTypeName;
+	public int getId() {
+		return this.id;
 	}
 
-	/** full constructor */
-	public TeachArrangeType(String teachTypeName,
-			Set<TeachArrange> teachArranges) {
-		this.teachTypeName = teachTypeName;
-		this.teachArranges = teachArranges;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	// Property accessors
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "teach_type_id", unique = true, nullable = false)
-	public Integer getTeachTypeId() {
-		return this.teachTypeId;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setTeachTypeId(Integer teachTypeId) {
-		this.teachTypeId = teachTypeId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@Column(name = "teach_type_name", nullable = false, length = 50)
-	public String getTeachTypeName() {
-		return this.teachTypeName;
-	}
-
-	public void setTeachTypeName(String teachTypeName) {
-		this.teachTypeName = teachTypeName;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teachArrangeType")
-	public Set<TeachArrange> getTeachArranges() {
+	public List<TeachArrange> getTeachArranges() {
 		return this.teachArranges;
 	}
 
-	public void setTeachArranges(Set<TeachArrange> teachArranges) {
+	public void setTeachArranges(List<TeachArrange> teachArranges) {
 		this.teachArranges = teachArranges;
 	}
 
+	public TeachArrange addTeachArrange(TeachArrange teachArrange) {
+		getTeachArranges().add(teachArrange);
+		teachArrange.setTeachArrangeType(this);
+
+		return teachArrange;
+	}
+
+	public TeachArrange removeTeachArrange(TeachArrange teachArrange) {
+		getTeachArranges().remove(teachArrange);
+		teachArrange.setTeachArrangeType(null);
+
+		return teachArrange;
+	}
+
+	@Override
+	public String toString() {
+		return "TeachArrangeType [id=" + id + ", name=" + name + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TeachArrangeType other = (TeachArrangeType) obj;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	public TeachArrangeType(int id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	
 }

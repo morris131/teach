@@ -24,7 +24,7 @@
   
   <!-- HTML5 Support for IE -->
   <!--[if lt IE 9]>
-  <script src="js/html5shim.js"></script>
+  <script src="${ctx}/static/js/html5shim.js"></script>
   <![endif]--> 
 </head>
 
@@ -45,16 +45,6 @@
               <!-- Widget head -->
               <div class="widget-head">
                 <i class="icon-lock"></i> 教学网站后台管理系统
-                			<%
-	String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
-	if(error != null){
-	%>
-		<div style="color: red">
-			 登录失败，请重试.
-		</div>
-	<%
-	}
-	%>
               </div>
 
               <div class="widget-content">
@@ -62,6 +52,9 @@
                   <!-- Login form -->
                   <form class="form-horizontal" action="${ctx}/admin/login" method="post" class="form-horizontal">
                     <!-- Email -->
+                    <div style="color: red;text-align: center;margin-bottom: 15px;">
+						 ${message }
+					</div>
                     <div class="form-group">
                       <label class="control-label col-lg-3" for="inputEmail">用户名:</label>
                       <div class="col-lg-9">
@@ -75,15 +68,6 @@
                         <input type="password" class="form-control required"     id="password" name="userPassword"   placeholder="密码">
                       </div>
                     </div>
-                    <!-- Remember me checkbox and sign in button -->
-                    <div class="form-group">
-					<div class="col-lg-9 col-lg-offset-3">
-                      <div class="checkbox">
-                        <label> 
-                        </label>
-						</div>
-					</div>
-					</div>
                         <div class="col-lg-9 col-lg-offset-2">
 							<button type="submit" class="btn btn-danger">登录</button>
 							<button type="reset" class="btn btn-default">重置</button>

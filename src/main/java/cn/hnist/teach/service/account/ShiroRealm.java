@@ -1,5 +1,9 @@
 package cn.hnist.teach.service.account;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.annotation.Resource;
 
 import org.apache.shiro.SecurityUtils;
@@ -16,14 +20,15 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 
-import cn.hnist.teach.entity.TeachUser;
-import cn.hnist.teach.service.inter.ITeachUserService;
+import cn.hnist.teach.entity.Role;
+import cn.hnist.teach.entity.User;
+import cn.hnist.teach.service.inter.IUserService;
 
 @Service
 public class ShiroRealm extends AuthorizingRealm { 
 	
 	@Resource
-	private ITeachUserService<TeachUser,String> teachUserService;
+	private IUserService userService;
 	
    /**
     * 角色验证
@@ -31,18 +36,25 @@ public class ShiroRealm extends AuthorizingRealm {
     @Override  
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){  
         //获取当前登录的用户名,等价于(String)principals.fromRealm(this.getName()).iterator().next()  
-        String userName = (String)super.getAvailablePrincipal(principals); 
-        
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();  
-        
-        TeachUser user = teachUserService.findOne(userName);
-        
-        if(null!=user){  
-            info.addRole(user.getUserRole());  
-            return info;  
-        }else{
-        	return null;  
-        }
+    	 String username = (String)principals.getPrimaryPrincipal();
+         
+         System.out.println("授权:"+username);
+         
+         User user = userService.findByUsername(username);
+         
+         List<Role> roles = user.getRoles();
+         
+         Set<String> roleNames = new HashSet<String>(); 
+         
+         for (Role role : roles) {
+ 			roleNames.add(role.getName());
+ 		}
+
+         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+         authorizationInfo.setRoles(roleNames);
+         
+         return authorizationInfo;
+
     }  
    
        
@@ -54,10 +66,10 @@ public class ShiroRealm extends AuthorizingRealm {
 
         UsernamePasswordToken token = (UsernamePasswordToken)authcToken;  
         
-        TeachUser user = teachUserService.findOne(token.getUsername());
+        User user = userService.findByUsername(token.getUsername());
         
         if(null != user){
-        	AuthenticationInfo info = new SimpleAuthenticationInfo(user.getUserName(), user.getUserPassword(), getName());
+        	AuthenticationInfo info = new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), getName());
         	this.setSession("currentUser", user);
         	return info;
         }else{

@@ -1,82 +1,66 @@
 package cn.hnist.teach.entity;
 
+import java.io.Serializable;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-/**
- * OutstandStudentType entity. @author MyEclipse Persistence Tools
- */
+import java.util.List;
+
 @Entity
-@Table(name = "outstand_student_type", catalog = "teach")
-public class OutstandStudentType implements java.io.Serializable {
-
-	// Fields
-
-	/**
-	 * 
-	 */
+@Table(name="outstand_student_type")
+public class OutstandStudentType implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Integer stuTypeId;
-	private String stuTypeName;
-	private Set<OutstandStudent> outstandStudents = new HashSet<OutstandStudent>(
-			0);
 
-	// Constructors
-
-	/** default constructor */
-	public OutstandStudentType() {
-	}
-
-	/** minimal constructor */
-	public OutstandStudentType(String stuTypeName) {
-		this.stuTypeName = stuTypeName;
-	}
-
-	/** full constructor */
-	public OutstandStudentType(String stuTypeName,
-			Set<OutstandStudent> outstandStudents) {
-		this.stuTypeName = stuTypeName;
-		this.outstandStudents = outstandStudents;
-	}
-
-	// Property accessors
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "stu_type_id", unique = true, nullable = false)
-	public Integer getStuTypeId() {
-		return this.stuTypeId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Short id; //编号
+
+	private String name; //类型名
+
+	//bi-directional many-to-one association to OutstandStudent
+	@OneToMany(mappedBy="outstandStudentType",cascade=CascadeType.REMOVE)
+	private List<OutstandStudent> outstandStudents;
+
+	public Short getId() {
+		return this.id;
 	}
 
-	public void setStuTypeId(Integer stuTypeId) {
-		this.stuTypeId = stuTypeId;
+	public void setId(Short id) {
+		this.id = id;
 	}
 
-	@Column(name = "stu_type_name", nullable = false, length = 50)
-	public String getStuTypeName() {
-		return this.stuTypeName;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setStuTypeName(String stuTypeName) {
-		this.stuTypeName = stuTypeName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "outstandStudentType")
-	public Set<OutstandStudent> getOutstandStudents() {
+	public List<OutstandStudent> getOutstandStudents() {
 		return this.outstandStudents;
 	}
 
-	public void setOutstandStudents(Set<OutstandStudent> outstandStudents) {
+	public void setOutstandStudents(List<OutstandStudent> outstandStudents) {
 		this.outstandStudents = outstandStudents;
 	}
 
+	public OutstandStudent addOutstandStudent(OutstandStudent outstandStudent) {
+		getOutstandStudents().add(outstandStudent);
+		outstandStudent.setOutstandStudentType(this);
+
+		return outstandStudent;
+	}
+
+	public OutstandStudent removeOutstandStudent(OutstandStudent outstandStudent) {
+		getOutstandStudents().remove(outstandStudent);
+		outstandStudent.setOutstandStudentType(null);
+
+		return outstandStudent;
+	}
+
+	@Override
+	public String toString() {
+		return "OutstandStudentType [id=" + id + ", name=" + name + "]";
+	}
 }

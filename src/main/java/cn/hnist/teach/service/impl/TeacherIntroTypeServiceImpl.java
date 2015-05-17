@@ -23,7 +23,7 @@ import cn.hnist.teach.service.inter.ITeacherIntroTypeService;
 @Service("teacherIntroTypeService")
 @Transactional
 public class TeacherIntroTypeServiceImpl extends BaseServiceImpl<TeacherIntroType, Integer>
-		implements ITeacherIntroTypeService<TeacherIntroType, Integer> {
+		implements ITeacherIntroTypeService {
 
 	@Resource
 	private TeacherIntroTypeDao teacherIntroTypeDao;

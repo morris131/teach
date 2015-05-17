@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemesh>
-
 <mine-type>text/html</mine-type>
-
 <mapping path="/static/*" exclue="true"></mapping>	
 <mapping path="/admin/login" exclue="true"></mapping>	
-
-<mapping path="/admin/*" decorator="/WEB-INF/layouts/default.jsp"></mapping>
-
-	
-
-	
-	
-	
+<mapping path="/admin/*" decorator="/WEB-INF/views/admin/layouts/default.jsp"></mapping>
+<mapping path="/*" decorator="/WEB-INF/views/layouts/default.jsp"></mapping>
+<mapping path="/toMessage" exclue="true"></mapping>	
+<mapping path="/toPublishMessage" exclue="true"></mapping>		
 </sitemesh>

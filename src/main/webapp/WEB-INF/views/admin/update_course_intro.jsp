@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>修改课程简介</title>
 <script type="text/javascript" charset="utf-8"
 	src="${ctx}/static/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8"
@@ -25,7 +25,7 @@
 				<div class="widget">
 					<!-- Widget head -->
 					<div class="widget-head">
-						<div class="pull-left">修改课程信息</div>
+						<div class="pull-left">修改课程简介</div>
 						<div class="clearfix"></div>
 					</div>
 
@@ -34,25 +34,20 @@
 						<div class="padd">
 
 							<form action="${ctx }/admin/saveCourseIntro" method="post" role="form" class="form-horizontal">
+							
+								<input type="hidden" value="${courseIntro.id }" name="id">
 
-								<div class="form-group">
-									<label class="col-lg-4 control-label">序号</label>
-									<div class="col-lg-8">
-										<input type="text" value="${courseIntro.courseId }" readonly="readonly" name="courseId" class="form-control" placeholder="请输入标题">
-									</div>
-								</div>
-								
 								<div class="form-group">
 									<label class="col-lg-4 control-label">标题</label>
 									<div class="col-lg-8">
-										<input type="text" name="courseTitle" value="${courseIntro.courseTitle }" class="form-control" placeholder="请输入标题">
+										<input type="text" name="title" value="${courseIntro.title }" class="form-control" placeholder="请输入标题">
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label class="col-lg-4 control-label">内容</label>
 									<div class="col-lg-8">
-										<textarea id="editor" style="height: 350px;" name="courseContent">${courseIntro.courseContent }</textarea>
+										<textarea id="editor" style="height: 350px;display: none;" name="content">${courseIntro.content }</textarea>
 									</div>
 								</div>
 								
@@ -76,7 +71,10 @@
 	</div>
 	
 <script type="text/javascript">
-	var ue = UE.getEditor('editor').setHeight(600);
+	$(function(){
+		var ue = UE.getEditor('editor');
+		$("#editor").show();
+	});
 </script>
 
 </body>

@@ -3,7 +3,10 @@
  */
 package cn.hnist.teach.service.inter;
 
-import java.io.Serializable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import cn.hnist.teach.entity.TeacherIntro;
 
 /** 
  *	项 目 名:	teach
@@ -12,7 +15,13 @@ import java.io.Serializable;
  *	作    者:	Morris
  *	创建时间:	2015年3月9日 下午8:36:04
  */
-public interface ITeacherIntroService<T,ID extends Serializable> extends IBaseService<T, ID>{
+public interface ITeacherIntroService extends IBaseService<TeacherIntro, Integer>{
+	
+	Page<TeacherIntro> findAll(Pageable pageable,Integer type);
+	
+	TeacherIntro getLast(Integer id);
+	
+	TeacherIntro getNext(Integer id);
 
 }
 

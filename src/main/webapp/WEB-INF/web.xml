@@ -11,7 +11,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:/spring-context.xml,
-			classpath:/applicationContext-shiro.xml
+			classpath:/spring-shiro.xml
 		</param-value>
 	</context-param>
 
@@ -78,7 +78,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring-mvc.xml</param-value>
+			<param-value>classpath:/spring-mvc.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -105,5 +105,10 @@
 	<error-page>
 		<error-code>404</error-code>
 		<location>/WEB-INF/views/error/404.jsp</location>
+	</error-page>
+	<!-- 无权限页面 -->
+	<error-page>
+		<exception-type>org.apache.shiro.authz.UnauthorizedException</exception-type>
+		<location>/WEB-INF/views/admin/unauthorized.jsp</location>
 	</error-page>
 </web-app>

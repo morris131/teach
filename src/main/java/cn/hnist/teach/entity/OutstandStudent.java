@@ -1,77 +1,105 @@
 package cn.hnist.teach.entity;
 
+import java.io.Serializable;
+import java.util.Date;
 
-import java.sql.Timestamp;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-/**
- * OutstandStudent entity. @author MyEclipse Persistence Tools
- */
 @Entity
-@Table(name = "outstand_student", catalog = "teach")
-public class OutstandStudent implements java.io.Serializable {
-
-	// Fields
-
-	/**
-	 * 
-	 */
+@Table(name="outstand_student")
+public class OutstandStudent implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Integer stuId;
-	private OutstandStudentType outstandStudentType;
-	private String stuTitle;
-	private String stuContent;
-	private Timestamp stuDate;
-	private Integer stuCount;
 
-	// Constructors
-
-	/** default constructor */
-	public OutstandStudent() {
-	}
-
-	/** minimal constructor */
-	public OutstandStudent(String stuTitle, String stuContent,
-			Timestamp stuDate, Integer stuCount) {
-		this.stuTitle = stuTitle;
-		this.stuContent = stuContent;
-		this.stuDate = stuDate;
-		this.stuCount = stuCount;
-	}
-
-	/** full constructor */
-	public OutstandStudent(OutstandStudentType outstandStudentType,
-			String stuTitle, String stuContent, Timestamp stuDate,
-			Integer stuCount) {
-		this.outstandStudentType = outstandStudentType;
-		this.stuTitle = stuTitle;
-		this.stuContent = stuContent;
-		this.stuDate = stuDate;
-		this.stuCount = stuCount;
-	}
-
-	// Property accessors
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "stu_id", unique = true, nullable = false)
-	public Integer getStuId() {
-		return this.stuId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id; // 编号
+
+	@Lob
+	private String content; // 描述
+
+	private Long count; // 点击次数
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date datetime; // 发布时间
+
+	private String title; // 标题
+	
+	private String fileName; // 文件名 
+	
+	@ManyToOne
+	@JoinColumn(name="src")
+	private ResourceSrc resourceSrc; // 来源
+
+	//bi-directional many-to-one association to OutstandStudentType
+	@ManyToOne
+	@JoinColumn(name="type")
+	private OutstandStudentType outstandStudentType; // 类型
+
+	public int getId() {
+		return this.id;
 	}
 
-	public void setStuId(Integer stuId) {
-		this.stuId = stuId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "stu_type")
+	public String getContent() {
+		return this.content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Long getCount() {
+		return this.count;
+	}
+
+	public void setCount(Long count) {
+		this.count = count;
+	}
+
+	public Date getDatetime() {
+		return this.datetime;
+	}
+
+	public void setDatetime(Date datetime) {
+		this.datetime = datetime;
+	}
+
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public ResourceSrc getResourceSrc() {
+		return resourceSrc;
+	}
+
+	public void setResourceSrc(ResourceSrc resourceSrc) {
+		this.resourceSrc = resourceSrc;
+	}
+
 	public OutstandStudentType getOutstandStudentType() {
 		return this.outstandStudentType;
 	}
@@ -80,40 +108,10 @@ public class OutstandStudent implements java.io.Serializable {
 		this.outstandStudentType = outstandStudentType;
 	}
 
-	@Column(name = "stu_title", nullable = false, length = 50)
-	public String getStuTitle() {
-		return this.stuTitle;
+	@Override
+	public String toString() {
+		return "OutstandStudent [id=" + id + ", content=" + content
+				+ ", count=" + count + ", datetime=" + datetime + ", title="
+				+ title + ", fileName=" + fileName + "]";
 	}
-
-	public void setStuTitle(String stuTitle) {
-		this.stuTitle = stuTitle;
-	}
-
-	@Column(name = "stu_content", nullable = false, length = 65535)
-	public String getStuContent() {
-		return this.stuContent;
-	}
-
-	public void setStuContent(String stuContent) {
-		this.stuContent = stuContent;
-	}
-
-	@Column(name = "stu_date", nullable = false, length = 19)
-	public Timestamp getStuDate() {
-		return this.stuDate;
-	}
-
-	public void setStuDate(Timestamp stuDate) {
-		this.stuDate = stuDate;
-	}
-
-	@Column(name = "stu_count", nullable = false)
-	public Integer getStuCount() {
-		return this.stuCount;
-	}
-
-	public void setStuCount(Integer stuCount) {
-		this.stuCount = stuCount;
-	}
-
 }
