@@ -21,6 +21,8 @@ import cn.hnist.teach.entity.LoginLog;
 import cn.hnist.teach.service.inter.ILoginLogService;
 import cn.hnist.teach.service.inter.IUserService;
 
+import com.octo.captcha.module.servlet.image.SimpleImageCaptchaServlet;
+
 @Controller
 @RequestMapping("admin")
 public class LoginController {
@@ -54,6 +56,16 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(String userName, String userPassword,HttpServletRequest request, RedirectAttributes redirectAttributes) {
 		logger.info("登录用户名: " + userName);
+		
+		String userCaptchaResponse = request.getParameter("checkCode");
+		boolean captchaPassed = SimpleImageCaptchaServlet.validateResponse(request, userCaptchaResponse);
+		
+		if(!captchaPassed){
+			redirectAttributes.addFlashAttribute("message", "验证码错误");
+			return "redirect:/admin/login";
+		}
+		
+		
 		
 		if (null != userName && !"".equals(userName) && null != userPassword
 				&& !"".equals(userPassword)) {

@@ -15,7 +15,8 @@ public class User implements Serializable {
 	private int id;
 
 	private String password;
-
+	
+	@Column(unique=true)
 	private String username;
 
 	//bi-directional many-to-many association to Role

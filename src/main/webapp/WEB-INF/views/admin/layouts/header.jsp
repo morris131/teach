@@ -18,7 +18,7 @@
 
        	<span class="logo-title">Android程序设计教学网站后台管理系统</span>
        	
-      <a href="" style="padding-left: 770px;font-size: 14px;">网站首页</a>
+      <a href="${ctx }/" style="padding-left: 770px;font-size: 14px;">网站首页</a>
        
         <!-- Links -->
         <ul class="nav navbar-nav pull-right">

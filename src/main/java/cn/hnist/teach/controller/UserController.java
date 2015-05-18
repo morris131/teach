@@ -7,11 +7,13 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cn.hnist.teach.entity.Role;
 import cn.hnist.teach.entity.User;
@@ -29,6 +31,7 @@ public class UserController {
 	private IRoleService roleService;
 	
 	@RequestMapping("findUsers")
+	@RequiresRoles("admin")
 	public String findUsers(Integer pageNumber, Integer pageSize, Model model){
 		
 		if(null == pageNumber){
@@ -48,7 +51,13 @@ public class UserController {
 	}
 	
 	@RequestMapping("saveUser")
-	public String saveUser(User user){
+	public String saveUser(User user,RedirectAttributes redirectAttributes){
+		//
+		User findByUsername = userService.findByUsername(user.getUsername());
+		if(null != findByUsername){
+			redirectAttributes.addFlashAttribute("message", "用户名已存在");
+			return "redirect:/admin/addUser";
+		}
 		userService.save(user);
 		return "redirect:/admin/findUsers";
 	}
@@ -70,6 +79,7 @@ public class UserController {
 	}
 	
 	@RequestMapping("modifyPassword")
+	@RequiresRoles("admin")
 	public String modifyPassword(){
 		return "admin/modify_password";
 	}

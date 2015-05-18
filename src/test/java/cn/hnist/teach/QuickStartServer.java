@@ -6,7 +6,6 @@ import org.eclipse.jetty.server.Server;
 /**
  * 使用Jetty运行调试Web应用, 在Console输入回车快速重新加载应用.
  * 
- * @author andy
  */
 public class QuickStartServer {
 

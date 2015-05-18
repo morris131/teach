@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ public class AdvController {
 	private IAdvService advService;
 	
 	@RequestMapping("findAdvs")
+	@RequiresRoles("admin")
 	public String findAdvs(Integer pageNumber, Integer pageSize, Model model){
 		
 		if(null == pageNumber){

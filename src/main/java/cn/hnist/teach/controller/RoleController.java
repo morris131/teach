@@ -22,9 +22,8 @@ public class RoleController {
 	
 	@Resource
 	private IRoleService roleService;
-	
+	@RequiresRoles("admin")
 	@RequestMapping("findRoles")
-	//@RequiresRoles("admin")
 	public String findRoles(Model model){
 		
 		List<Role> roles = (List<Role>) roleService.findAll();

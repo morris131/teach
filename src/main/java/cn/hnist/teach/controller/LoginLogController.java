@@ -2,6 +2,7 @@ package cn.hnist.teach.controller;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ public class LoginLogController {
 	private ILoginLogService loginLogService;
 	
 	@RequestMapping("findLoginLogs")
+	@RequiresRoles("admin")
 	public String findLoginLogs(Integer pageNumber,Integer pageSize, Model model){
 		
 		if(null == pageNumber){

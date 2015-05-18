@@ -31,6 +31,7 @@
 									<label class="col-lg-4 control-label">用户名</label>
 									<div class="col-lg-8">
 										<input type="text" name="username" class="form-control" placeholder="请输入用户名">
+										<span style="color: red;">${message }</span>
 									</div>
 								</div>
 								

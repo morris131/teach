@@ -68,6 +68,15 @@
                         <input type="password" class="form-control required"     id="password" name="userPassword"   placeholder="密码">
                       </div>
                     </div>
+                    
+                     <div class="form-group">
+                      <label class="control-label col-lg-3" for="inputEmail">验证码:</label>
+                      <div class="col-lg-9">
+                      	<input type="text" id="checkCode" name="checkCode" class="form-control required"/>
+                      	<img style="cursor: pointer;" onclick="this.src='${ctx }/static/images/jcaptcha.jpg?t='+Math.random()" src="${ctx }/static/images/jcaptcha.jpg" />
+                      	<a href="document.getElementById('checkCode').src='${ctx }/static/images/jcaptcha.jpg?t='+Math.random()'">看不清楚，换一张</a>
+                      </div>
+                    </div>
                         <div class="col-lg-9 col-lg-offset-2">
 							<button type="submit" class="btn btn-danger">登录</button>
 							<button type="reset" class="btn btn-default">重置</button>
